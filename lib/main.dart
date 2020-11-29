@@ -27,11 +27,9 @@ class MyApp extends StatelessWidget {
 }
 
 Widget _hardleAuth() {
- return StreamBuilder(
-     stream:FirebaseAuth.instance.authStateChanges(),
-     builder: (context, snapshot){
-       return (!snapshot.hasData) ? LogController() : MainAppController();
-     }
- );
-
+  return StreamBuilder(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        return (!snapshot.hasData) ? LogController() : MainAppController(snapshot.data.uid);
+      });
 }

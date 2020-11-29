@@ -36,8 +36,11 @@ class FireHelper {
   logOut() => auth_instance.signOut();
   //database
 
-  static final data_instance = FirebaseFirestore.instance.collection("users");
+  static final data_instance = FirebaseFirestore.instance;
+
+  final fire_user = data_instance.collection("users");
+
   addUser(String uid, Map<String, dynamic> map) {
-    data_instance.doc(uid).set(map);
+    fire_user.doc(uid).set(map);
   }
 }
