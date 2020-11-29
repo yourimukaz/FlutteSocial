@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttersocial/view/my_material.dart';
 
 class MainAppController extends StatefulWidget {
   @override
@@ -8,10 +9,6 @@ class MainAppController extends StatefulWidget {
 class _MainAppControllerState extends State<MainAppController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Main"),
-      ),
-    );
+    return LoadingScaffold();
   }
 }
