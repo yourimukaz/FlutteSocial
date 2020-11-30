@@ -18,6 +18,9 @@ Icon friendsIcon = Icon(Icons.group);
 Icon notifIcon = Icon(Icons.notifications);
 Icon profilIcon = Icon(Icons.account_circle);
 Icon writeIcon = Icon(Icons.border_color);
+Icon sendIcon = Icon(Icons.send);
+Icon camIcon = Icon(Icons.camera_enhance);
+Icon libraryIcon = Icon(Icons.photo_library);
 
 //keys
 String keyName = "name";

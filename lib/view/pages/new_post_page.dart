@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fluttersocial/view/my_material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class NewPost extends StatefulWidget {
   @override
@@ -8,6 +11,7 @@ class NewPost extends StatefulWidget {
 
 class _NewPostState extends State<NewPost> {
   TextEditingController _controller;
+  File imageTaken;
 
   @override
   void initState() {
@@ -37,6 +41,7 @@ class _NewPostState extends State<NewPost> {
         child: InkWell(
           onTap: (() => FocusScope.of(context).requestFocus(FocusNode())),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               PaddingWith(
                 widget: MyText(
@@ -60,6 +65,22 @@ class _NewPostState extends State<NewPost> {
                 top: 25.0,
                 right: 25.0,
                 left: 25.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      IconButton(icon: camIcon, onPressed: (() => takePicture(ImageSource.camera))),
+                      IconButton(icon: libraryIcon, onPressed: (()=>takePicture(ImageSource.gallery)))
+                    ],
+                  ),
+                  Container(
+                    width: 75.0,
+                    height: 75.0,
+                    child: (imageTaken == null) ? MyText("Aucune Image", fontSize: 13.0,color: base,): Image.file(imageTaken)   ,
+                  )
+                ],
               )
             ],
           ),
@@ -67,4 +88,7 @@ class _NewPostState extends State<NewPost> {
       ),
     );
   }
+
+Future<void> takePicture(ImageSource source) async{}
+
 }
