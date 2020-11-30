@@ -12,6 +12,13 @@ AssetImage eventImage = AssetImage("assets/event.jpg");
 AssetImage homeImage = AssetImage("assets/home.jpg");
 AssetImage profileImage = AssetImage("assets/profile.jpg");
 
+//Icons
+Icon homeIcon = Icon(Icons.home);
+Icon friendsIcon = Icon(Icons.group);
+Icon notifIcon = Icon(Icons.notifications);
+Icon profilIcon = Icon(Icons.account_circle);
+Icon writeIcon = Icon(Icons.border_color);
+
 //keys
 String keyName = "name";
 String keySurname = "surname";

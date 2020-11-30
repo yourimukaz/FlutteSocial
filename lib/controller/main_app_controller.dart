@@ -48,17 +48,24 @@ class _MainAppControllerState extends State<MainAppController> {
             bottomNavigationBar: BottonBar(
               items: [
                 BarItem(
-                    icon: Icon(Icons.android),
+                    icon: homeIcon,
                     onPressed: (() => buttonSelected(0)),
                     selected: (index == 0)),
                 BarItem(
-                    icon: Icon(Icons.android),
+                    icon: friendsIcon,
                     onPressed: (() => buttonSelected(1)),
                     selected: (index == 1)),
+                SizedBox(
+                  width: 10,
+                ),
                 BarItem(
-                    icon: Icon(Icons.android),
+                    icon: notifIcon,
                     onPressed: (() => buttonSelected(2)),
-                    selected: (index == 2))
+                    selected: (index == 2)),
+                BarItem(
+                    icon: profilIcon,
+                    onPressed: (() => buttonSelected(3)),
+                    selected: (index == 3))
               ],
             ),
             body: Center(
@@ -67,8 +74,17 @@ class _MainAppControllerState extends State<MainAppController> {
                 color: baseAccent,
               ),
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: write,
+              child: writeIcon,
+              backgroundColor: pointer,
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
           );
   }
+
+  write() {}
 
   buttonSelected(int index) {
     setState(() {
