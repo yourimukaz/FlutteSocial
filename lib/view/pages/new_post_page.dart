@@ -71,14 +71,24 @@ class _NewPostState extends State<NewPost> {
                 children: [
                   Column(
                     children: [
-                      IconButton(icon: camIcon, onPressed: (() => takePicture(ImageSource.camera))),
-                      IconButton(icon: libraryIcon, onPressed: (()=>takePicture(ImageSource.gallery)))
+                      IconButton(
+                          icon: camIcon,
+                          onPressed: (() => takePicture(ImageSource.camera))),
+                      IconButton(
+                          icon: libraryIcon,
+                          onPressed: (() => takePicture(ImageSource.gallery)))
                     ],
                   ),
                   Container(
                     width: 75.0,
                     height: 75.0,
-                    child: (imageTaken == null) ? MyText("Aucune Image", fontSize: 13.0,color: base,): Image.file(imageTaken)   ,
+                    child: (imageTaken == null)
+                        ? MyText(
+                            "Aucune Image",
+                            fontSize: 13.0,
+                            color: base,
+                          )
+                        : Image.file(imageTaken),
                   )
                 ],
               ),
@@ -90,8 +100,18 @@ class _NewPostState extends State<NewPost> {
     );
   }
 
-Future<void> takePicture(ImageSource source) async{}
+  Future<void> takePicture(ImageSource source) async {
+    File image = await ImagePicker.pickImage(
+        source: source, maxHeight: 500.0, maxWidth: 500.0);
+    setState(() {
+      imageTaken = image;
+    });
+  }
 
-sendToFireBase(){}
-
+  sendToFireBase() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    if (imageTaken != null &&
+        _controller.text != null &&
+        _controller.text != "") {}
+  }
 }
