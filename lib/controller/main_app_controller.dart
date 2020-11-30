@@ -103,7 +103,7 @@ class _MainAppControllerState extends State<MainAppController> {
       case 2:
         return NotifPage();
       default:
-        return ProfilPage();
+        return ProfilPage(me);
     }
   }
 }

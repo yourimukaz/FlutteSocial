@@ -45,6 +45,10 @@ class FireHelper {
 
   final fire_user = data_instance.collection("users");
 
+  Stream<QuerySnapshot> postsFrom(String uid) {
+    return fire_user.doc(uid).collection("posts").snapshots();
+  }
+
   addUser(String uid, Map<String, dynamic> map) {
     fire_user.doc(uid).set(map);
   }
