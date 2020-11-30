@@ -110,27 +110,8 @@ class _LogControllerState extends State<LogController> {
           right: 20.0,
         ),
         PaddingWith(
-          widget: Card(
-            elevation: 7.5,
-            child: Container(
-              width: 300.0,
-              height: 50.0,
-              decoration: MyGradient(
-                  startColor: baseAccent,
-                  endColor: base,
-                  raduis: 25.0,
-                  horizotal: true),
-              child: FlatButton(
-                  onPressed: () {
-                    signIn((index == 0));
-                  },
-                  child: MyText(
-                      (index == 0) ? "Se connecter" : "Creer un compte")),
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25.0)),
-          ),
-          top: 15.0,
+          widget: ButtonGradient(callback: (() => signIn((index == 0))), text: (index == 0) ? "Se connecter" : "Creer un compte"),
+        top: 15.0,
           bottom: 15.0,
         )
       ],

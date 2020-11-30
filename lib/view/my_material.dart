@@ -11,3 +11,7 @@ export 'package:fluttersocial/view/my_widgets/painter.dart';
 export 'package:fluttersocial/view/my_widgets/loading_scaffold.dart';
 export 'package:fluttersocial/view/my_widgets/loading_center.dart';
 export 'package:fluttersocial/view/my_widgets/bottom_bar.dart';
+export 'package:fluttersocial/view/my_widgets/button_gradient.dart';
+
+//signIn((index == 0))
+//(index == 0) ? "Se connecter" : "Creer un compte")

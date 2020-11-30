@@ -31,7 +31,7 @@ class _NewPostState extends State<NewPost> {
   Widget build(BuildContext context) {
     return Container(
       color: base,
-      height: MediaQuery.of(context).size.height * 0.6,
+      height: MediaQuery.of(context).size.height * 0.75,
       child: Container(
         decoration: BoxDecoration(
             color: white,
@@ -81,7 +81,8 @@ class _NewPostState extends State<NewPost> {
                     child: (imageTaken == null) ? MyText("Aucune Image", fontSize: 13.0,color: base,): Image.file(imageTaken)   ,
                   )
                 ],
-              )
+              ),
+              ButtonGradient(callback: sendToFireBase, text: "Envoyer")
             ],
           ),
         ),
@@ -90,5 +91,7 @@ class _NewPostState extends State<NewPost> {
   }
 
 Future<void> takePicture(ImageSource source) async{}
+
+sendToFireBase(){}
 
 }
