@@ -22,7 +22,6 @@ class MainAppController extends StatefulWidget {
 class _MainAppControllerState extends State<MainAppController> {
   GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
   StreamSubscription streamListener;
-  User user;
   int index = 0;
 
   @override
@@ -31,7 +30,7 @@ class _MainAppControllerState extends State<MainAppController> {
     streamListener =
         FireHelper().fire_user.doc(widget.uid).snapshots().listen((document) {
       setState(() {
-        user = User(document);
+        me = User(document);
       });
     });
     super.initState();
@@ -46,7 +45,7 @@ class _MainAppControllerState extends State<MainAppController> {
 
   @override
   Widget build(BuildContext context) {
-    return (user == null)
+    return (me == null)
         ? LoadingScaffold()
         : Scaffold(
             key: _globalKey,

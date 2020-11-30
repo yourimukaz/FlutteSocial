@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fluttersocial/models/user.dart';
+
+//User
+User me;
 
 //Images
 const Color white = const Color(0xFFFFFFFF);
