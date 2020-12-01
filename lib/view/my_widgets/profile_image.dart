@@ -11,7 +11,7 @@ class ProfileImage extends InkWell {
         onTap: onPresse,
         child: CircleAvatar(
           radius: size,
-          backgroundImage: (urlString != null && urlString != "null") ? CachedNetworkImageProvider(urlString): logoImage,
+          backgroundImage: (urlString != null && urlString != "") ? CachedNetworkImageProvider(urlString): logoImage,
           backgroundColor: white,
         )
       );

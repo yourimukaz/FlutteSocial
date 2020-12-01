@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttersocial/delegate/header_delegate.dart';
+import 'package:fluttersocial/models/posts.dart';
 import 'package:fluttersocial/models/user.dart';
 import 'package:fluttersocial/util/fire_helper.dart';
 import 'package:fluttersocial/view/my_material.dart';
+import 'package:fluttersocial/view/tiles/postTile.dart';
 
 class ProfilPage extends StatefulWidget {
   final User user;
@@ -26,8 +28,9 @@ class _ProfilPageState extends State<ProfilPage> {
   void initState() {
     _isMe = (widget.user.uid == me.uid);
     super.initState();
-    _controller = ScrollController() ..addListener(() {
-      setState(() {}); 
+    _controller = ScrollController()
+      ..addListener(() {
+        setState(() {});
       });
   }
 
@@ -54,12 +57,19 @@ class _ProfilPageState extends State<ProfilPage> {
                   expandedHeight: expanded,
                   actions: [],
                   flexibleSpace: FlexibleSpaceBar(
-                    title: _showTitle ? MyText(widget.user.surname + " " + widget.user.name) : MyText(""),
+                    title: _showTitle
+                        ? MyText(widget.user.surname + " " + widget.user.name)
+                        : MyText(""),
                     background: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: profileImage, fit: BoxFit.cover)),
-                              child: Center(child: ProfileImage(urlString: widget.user.imageUrl,size: 60.0, onPresse: null),),
+                      child: Center(
+                        child: ProfileImage(
+                            urlString: widget.user.imageUrl,
+                            size: 60.0,
+                            onPresse: null),
+                      ),
                     ),
                   ),
                 ),
@@ -70,7 +80,13 @@ class _ProfilPageState extends State<ProfilPage> {
                 ),
                 SliverList(delegate:
                     SliverChildBuilderDelegate((BuildContext context, index) {
-                  return ListTile(title: MyText("Nouvelle tile : $index"),);
+                  if (index == document.length)
+                    return ListTile(
+                      title: MyText("Fin de liste"),
+                    );
+                  if (index > document.length) return null;
+                  Post post = Post(document[index]);
+                  return PostTile(post: post, user: widget.user);
                 }))
               ],
             );
