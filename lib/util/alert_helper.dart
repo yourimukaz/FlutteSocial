@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttersocial/util/fire_helper.dart';
 import 'package:fluttersocial/view/my_material.dart';
 
 class AlertHelper {
@@ -21,6 +22,34 @@ class AlertHelper {
             actions: [close(context, "OK")],
           );
         });
+  }
+
+  Future<void> disconnect(BuildContext context) async {
+    MyText title = MyText("Voulez-vous vous deconnnecter ? ");
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: title,
+            actions: [
+              close(context, "NOM"),
+              disconnectBtn(context)
+            ],
+          );
+        });
+  }
+
+  FlatButton disconnectBtn(BuildContext context) {
+    return FlatButton(
+        onPressed: () {
+          FireHelper().logOut();
+          Navigator.pop(context);
+        },
+        child: MyText(
+          "OUI",
+          color: Colors.blue,
+        ));
   }
 
   FlatButton close(BuildContext context, String text) {

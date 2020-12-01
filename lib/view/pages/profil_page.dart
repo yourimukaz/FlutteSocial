@@ -55,7 +55,9 @@ class _ProfilPageState extends State<ProfilPage> {
                 SliverAppBar(
                   pinned: true,
                   expandedHeight: expanded,
-                  actions: [],
+                  actions: [
+                    (_isMe) ? IconButton(icon: settingIcon,color: pointer, onPressed: () => FireHelper().logOut()) : MyText("Suivre ou ne plus suivre")
+                  ],
                   flexibleSpace: FlexibleSpaceBar(
                     title: _showTitle
                         ? MyText(widget.user.surname + " " + widget.user.name)

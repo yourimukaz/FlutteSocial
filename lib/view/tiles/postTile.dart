@@ -33,18 +33,21 @@ class PostTile extends StatelessWidget {
                 )
               ],
             ),
-            (post.imagesUrl != null && post.imagesUrl != "") 
+
+            (post.imagesUrl != null && post.imagesUrl != "" ) 
             ? PaddingWith(widget: Container(width: MediaQuery.of(context).size.width,height: 1.0,color: baseAccent,)): Container(height: 0.0,),
+
             (post.imagesUrl != null && post.imagesUrl != "")
             ? PaddingWith(widget: Container(
               width: MediaQuery.of(context).size.width * 0.85,
               height: MediaQuery.of(context).size.width * 0.85,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
-                image: DecorationImage(image: CachedNetworkImageProvider(post.imagesUrl), fit: BoxFit.cover)
+                image: DecorationImage(image: CachedNetworkImageProvider(post.imagesUrl), fit: BoxFit.fitWidth)
                 ) 
               )
-            ): Container(height: 0.0,),
+            ): Container(height: 0.0,color: pointer),
+
             (post.text != null && post.text != "") 
             ? PaddingWith(widget: Container(width: MediaQuery.of(context).size.width,height: 1.0,color: baseAccent,)): Container(height: 0.0,),
 
