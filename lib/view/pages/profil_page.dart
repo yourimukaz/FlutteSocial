@@ -17,7 +17,7 @@ class _ProfilPageState extends State<ProfilPage> {
   bool _isMe = false;
   ScrollController _controller;
   double expanded = 200.0;
-  bool get _showTile {
+  bool get _showTitle {
     return _controller.hasClients &&
         _controller.offset > expanded - kToolbarHeight;
   }
@@ -26,7 +26,9 @@ class _ProfilPageState extends State<ProfilPage> {
   void initState() {
     _isMe = (widget.user.uid == me.uid);
     super.initState();
-    _controller = ScrollController();
+    _controller = ScrollController() ..addListener(() {
+      setState(() {}); 
+      });
   }
 
   @override
@@ -52,18 +54,19 @@ class _ProfilPageState extends State<ProfilPage> {
                   expandedHeight: expanded,
                   actions: [],
                   flexibleSpace: FlexibleSpaceBar(
-                    title: MyText(widget.user.name),
+                    title: _showTitle ? MyText(widget.user.surname + " " + widget.user.name) : MyText(""),
                     background: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: profileImage, fit: BoxFit.cover)),
+                              child: Center(child: ProfileImage(urlString: widget.user.imageUrl,size: 60.0, onPresse: null),),
                     ),
                   ),
                 ),
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: MyHeader(
-                      user: widget.user, callback: null, scrolled: _showTile),
+                      user: widget.user, callback: null, scrolled: _showTitle),
                 ),
                 SliverList(delegate:
                     SliverChildBuilderDelegate((BuildContext context, index) {

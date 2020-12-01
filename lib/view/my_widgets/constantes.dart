@@ -38,3 +38,4 @@ String keyText = "text";
 String keyDate = "date";
 String keyLikes = "likes";
 String keyComments = "comments";
+String keyDescription = "description";
