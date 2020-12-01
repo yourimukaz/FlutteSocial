@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttersocial/view/my_material.dart';
@@ -11,7 +12,7 @@ class ProfileImage extends InkWell {
         onTap: onPresse,
         child: CircleAvatar(
           radius: size,
-          backgroundImage: (urlString != null && urlString != "") ? CachedNetworkImageProvider(urlString): logoImage,
+          backgroundImage: (urlString != null && urlString != "") ? CachedNetworkImageProvider(urlString) : logoImage,
           backgroundColor: white,
         )
       );

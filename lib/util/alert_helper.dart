@@ -40,12 +40,48 @@ class AlertHelper {
         });
   }
 
-  void changeUser(BuildContext context) {
-    showModalBottomSheet(
+  Future<void> changeUserAlert(BuildContext context,
+      {@required TextEditingController name,
+      @required TextEditingController surname,
+      @required TextEditingController desc}) async {
+    MyTextField nameTF = MyTextField(
+      controller: name,
+      hint: me.name,
+    );
+    MyTextField surnameTF = MyTextField(controller: surname, hint: me.surname);
+    MyTextField descTF = MyTextField(
+      controller: desc,
+      hint: me.description ?? "Aucune description",
+    );
+    MyText title = MyText(
+      "Changer les donnees de l'utilisateur",
+      color: pointer,
+    );
+    return showDialog(
         context: context,
-        builder: (BuildContext ctx) {
-          return Container(
-            color: base,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: title,
+            content: Column(
+              children: [nameTF, surnameTF, descTF],
+            ),
+            actions: [
+              close(context, "Annuler"),
+              FlatButton(
+                  onPressed: () {
+                    Map<String, dynamic> data = {};
+                    if (name.text != null && name.text != "")
+                      data[keyName] = name.text;
+                    if (surname.text != null && surname.text != "")
+                      data[keySurname] = surname.text;
+                    if (desc.text != null && desc.text != "")
+                      data[keyDescription] = desc.text;
+                    FireHelper().modifyUser(data);
+                    Navigator.pop(context);
+                  },
+                  child: MyText("Valider", color: Colors.blue,))
+            ],
           );
         });
   }

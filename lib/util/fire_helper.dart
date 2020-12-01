@@ -53,6 +53,18 @@ class FireHelper {
     fire_user.doc(uid).set(map);
   }
 
+  modifyUser(Map<String, dynamic> data) {
+    fire_user.doc(me.uid).update(data);
+  }
+
+  modifyPicture(File file) {
+    StorageReference reference = storage_user.child(me.uid);
+    addImage(file, reference).then((finalised) {
+      Map<String, dynamic> data = {keyImageUrl: finalised};
+      modifyUser(data);
+    });
+  }
+
   addPost(String uid, String text, File file) {
     int date = DateTime.now().microsecondsSinceEpoch.toInt();
     List<dynamic> likes = [];

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttersocial/controller/log_controller.dart';
 import 'package:fluttersocial/controller/main_app_controller.dart';
+import 'package:fluttersocial/view/my_material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.red,
+        canvasColor: Colors.transparent,
+        primaryColor: base,
+        accentColor: baseAccent,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: _hardleAuth(),
