@@ -24,25 +24,46 @@ class MyHeader extends SliverPersistentHeaderDelegate {
           children: [
             (scrolled)
                 ? Container(width: 0.0, height: 0.0)
-                : MyText("${user.surname} ${user.name}"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ProfileImage(urlString: user.imageUrl, onPresse: null),
-                    MyText((user.description == null) ? ("Aucun description"): user.description )
-                  ],
+                : element(context,"${user.surname} ${user.name}"),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ProfileImage(urlString: user.imageUrl, onPresse: null),
+                element(context, (user.description == null)
+                    ? ("Aucun description")
+                    : user.description)
+              ],
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 1.0,
+              color: base,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                InkWell(
+                  child: MyText("Followers: ${user.followers.length} "),
                 ),
-                Container(width: MediaQuery.of(context).size.width,height: 1.0,color: base,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    InkWell(child: MyText("Followers: ${user.followers.length} "),),
-                    InkWell(child: MyText("Following: ${user.following.length - 1}"),)
-                  ],
+                InkWell(
+                  child: MyText("Following: ${user.following.length - 1}"),
                 )
+              ],
+            )
           ],
         ));
+  }
+
+  Widget element(BuildContext context, String text) {
+    if (user.uid == me.uid) {
+      return InkWell(
+        child: MyText(text),
+        onTap: () => AlertHelper().changeUser(context),
+      );
+    } else {
+      return MyText(text);
+    }
   }
 
   @override

@@ -56,7 +56,7 @@ class _ProfilPageState extends State<ProfilPage> {
                   pinned: true,
                   expandedHeight: expanded,
                   actions: [
-                    (_isMe) ? IconButton(icon: settingIcon,color: pointer, onPressed: () => FireHelper().logOut()) : MyText("Suivre ou ne plus suivre")
+                    (_isMe) ? IconButton(icon: settingIcon,color: pointer, onPressed: () => AlertHelper().disconnect(context)) : MyText("Suivre ou ne plus suivre")
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     title: _showTitle

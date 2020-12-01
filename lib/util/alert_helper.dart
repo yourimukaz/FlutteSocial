@@ -25,17 +25,27 @@ class AlertHelper {
   }
 
   Future<void> disconnect(BuildContext context) async {
-    MyText title = MyText("Voulez-vous vous deconnnecter ? ");
+    MyText title = MyText(
+      "Voulez-vous vous deconnnecter ? ",
+      color: base,
+    );
     return showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
           return AlertDialog(
             title: title,
-            actions: [
-              close(context, "NOM"),
-              disconnectBtn(context)
-            ],
+            actions: [close(context, "NOM"), disconnectBtn(context)],
+          );
+        });
+  }
+
+  void changeUser(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext ctx) {
+          return Container(
+            color: base,
           );
         });
   }
