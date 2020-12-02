@@ -14,3 +14,4 @@ export 'package:fluttersocial/view/my_widgets/bottom_bar.dart';
 export 'package:fluttersocial/view/my_widgets/button_gradient.dart';
 export 'package:fluttersocial/view/my_widgets/profile_image.dart';
 export 'package:fluttersocial/view/my_widgets/follows_button.dart';
+export 'package:fluttersocial/view/my_widgets/my_app_bar.dart';

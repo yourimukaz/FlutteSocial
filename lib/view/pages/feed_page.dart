@@ -9,6 +9,10 @@ class FeedPage extends StatefulWidget {
 class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: MyText("Fil d'actualiter"));
+    return NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool scrolled) {
+          return [MyAppBar(title: "Fil d'actualite", image: homeImage)];
+        },
+        body: LoadingCenter());
   }
 }
