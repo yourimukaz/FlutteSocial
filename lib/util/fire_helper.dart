@@ -2,8 +2,13 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttersocial/models/user.dart';
+import 'package:fluttersocial/view/my_widgets/constantes.dart';
+ 
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:fluttersocial/view/my_material.dart';
+
+
 
 class FireHelper {
   //authentification
@@ -64,6 +69,8 @@ class FireHelper {
       modifyUser(data);
     });
   }
+
+  
 
   addPost(String uid, String text, File file) {
     int date = DateTime.now().microsecondsSinceEpoch.toInt();

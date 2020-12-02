@@ -103,7 +103,7 @@ class _NewPostState extends State<NewPost> {
 
   Future<void> takePicture(ImageSource source) async {
     File image = await ImagePicker.pickImage(
-        source: source, maxHeight: 500.0, maxWidth: 500.0);
+        source: source, maxHeight: 300.0, maxWidth: 300.0);
     setState(() {
       imageTaken = image;
     });
