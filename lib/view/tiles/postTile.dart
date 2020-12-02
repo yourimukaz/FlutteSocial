@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttersocial/models/posts.dart';
 import 'package:fluttersocial/models/user.dart';
+import 'package:fluttersocial/util/fire_helper.dart';
 import 'package:fluttersocial/view/my_material.dart';
 
 class PostTile extends StatelessWidget {
@@ -28,7 +29,7 @@ class PostTile extends StatelessWidget {
                 Column(
                   children: [
                     MyText("${user.surname} ${user.name}", color: baseAccent,),
-                    MyText("${post.date}",color: pointer,)
+                    MyText(DateHelper().myDate(post.date), color: pointer,)
                   ],
                 )
               ],
@@ -58,7 +59,7 @@ class PostTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton(icon: (post.likes.contains(user.uid)? likeFull:likeEmpty), onPressed: null),
+                IconButton(icon: (post.likes.contains(user.uid)? likeFull:likeEmpty), onPressed: () => FireHelper().addLike(post)),
                 MyText(post.likes.length.toString(), color: baseAccent,),
                 IconButton(icon: msgIcon, onPressed: null),
                 MyText(post.comments.length.toString(), color: baseAccent,)

@@ -2,13 +2,12 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttersocial/models/posts.dart';
 import 'package:fluttersocial/models/user.dart';
 import 'package:fluttersocial/view/my_widgets/constantes.dart';
- 
+
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
-
 
 class FireHelper {
   //authentification
@@ -27,8 +26,8 @@ class FireHelper {
         .createUserWithEmailAndPassword(email: mail, password: pwd);
     //Creer mon utilisateur pour l'ajout dans la bdd
     String uid = user.user.uid;
-    List<dynamic> followers = [];
-    List<dynamic> following = [uid];
+    List<dynamic> followers = [uid];
+    List<dynamic> following = [];
 
     Map<String, dynamic> map = {
       keyName: name,
@@ -70,7 +69,17 @@ class FireHelper {
     });
   }
 
-  
+  addLike(Post post) {
+    if (post.likes.contains(me.uid)) {
+      post.ref.update({
+        keyLikes: FieldValue.arrayRemove([me.uid])
+      });
+    } else {
+      post.ref.update({
+        keyLikes: FieldValue.arrayUnion([me.uid])
+      });
+    }
+  }
 
   addPost(String uid, String text, File file) {
     int date = DateTime.now().microsecondsSinceEpoch.toInt();
