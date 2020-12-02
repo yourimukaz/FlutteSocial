@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttersocial/models/user.dart';
 import 'package:fluttersocial/util/fire_helper.dart';
 import 'package:fluttersocial/view/my_material.dart';
+import 'package:fluttersocial/view/tiles/user_tile.dart';
 
 class UsersPage extends StatefulWidget {
   @override
@@ -40,11 +41,7 @@ class _UsersPageState extends State<UsersPage> {
                   itemCount: documnets.length,
                   itemBuilder: (BuildContext context, int index) {
                     User user = User(documnets[index]);
-                    return ListTile(
-                      leading: ProfileImage(urlString: user.imageUrl, onPresse: null),
-                      title: MyText("${user.surname} ${user.name}", color: baseAccent,),
-                      trailing: FollowButton(user: user),
-                    );
+                    return UserTile(user);
                   },
                 ));
           } else {

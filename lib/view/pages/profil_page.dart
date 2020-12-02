@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,7 +12,7 @@ import 'package:fluttersocial/view/tiles/postTile.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilPage extends StatefulWidget {
-  final User user;
+  User user;
   ProfilPage(this.user);
 
   @override
@@ -30,6 +31,8 @@ class _ProfilPageState extends State<ProfilPage> {
         _controller.offset > expanded - kToolbarHeight;
   }
 
+  StreamSubscription subscription;
+
   @override
   void initState() {
     _isMe = (widget.user.uid == me.uid);
@@ -42,6 +45,13 @@ class _ProfilPageState extends State<ProfilPage> {
     _name = TextEditingController();
     _surname = TextEditingController();
     _desc = TextEditingController();
+
+    subscription =
+        FireHelper().fire_user.doc(widget.user.uid).snapshots().listen((data) {
+      setState(() {
+        widget.user = User(data);
+      });
+    });
   }
 
   @override
@@ -74,7 +84,7 @@ class _ProfilPageState extends State<ProfilPage> {
                             icon: settingIcon,
                             color: pointer,
                             onPressed: () => AlertHelper().disconnect(context))
-                        : MyText("Suivre ou ne plus suivre")
+                        : FollowButton(user: widget.user)
                   ],
                   flexibleSpace: FlexibleSpaceBar(
                     title: _showTitle
@@ -96,7 +106,9 @@ class _ProfilPageState extends State<ProfilPage> {
                 SliverPersistentHeader(
                   pinned: true,
                   delegate: MyHeader(
-                      user: widget.user, callback: changeFields, scrolled: _showTitle),
+                      user: widget.user,
+                      callback: changeFields,
+                      scrolled: _showTitle),
                 ),
                 SliverList(delegate:
                     SliverChildBuilderDelegate((BuildContext context, index) {
@@ -120,39 +132,40 @@ class _ProfilPageState extends State<ProfilPage> {
   }
 
   void changeUser() {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext ctx) {
-          return Container(
-            color: Colors.transparent,
-            child: Card(
-              elevation: 5.0,
-              margin: EdgeInsets.all(7.2),
-              child: Container(
-                color: base,
-                padding: EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyText("Modification de la photo de profil"),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                            icon: camIcon,
-                            onPressed: () {
-                              takePicture(ImageSource.camera);
-                              Navigator.pop(context);
-                            }),
-                        IconButton(
-                            icon: libraryIcon,
-                            onPressed: () {
-                              takePicture(ImageSource.gallery);
-                              Navigator.pop(context);
-                            })
-                      ],
-                    )
-                    /*  MyTextField(
+    if (widget.user.uid == me.uid) {
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext ctx) {
+            return Container(
+              color: Colors.transparent,
+              child: Card(
+                elevation: 5.0,
+                margin: EdgeInsets.all(7.2),
+                child: Container(
+                  color: base,
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MyText("Modification de la photo de profil"),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                              icon: camIcon,
+                              onPressed: () {
+                                takePicture(ImageSource.camera);
+                                Navigator.pop(context);
+                              }),
+                          IconButton(
+                              icon: libraryIcon,
+                              onPressed: () {
+                                takePicture(ImageSource.gallery);
+                                Navigator.pop(context);
+                              })
+                        ],
+                      )
+                      /*  MyTextField(
                       controller: _name ,hint: widget.user.name,
                     ),
                     MyTextField(
@@ -162,16 +175,18 @@ class _ProfilPageState extends State<ProfilPage> {
                       controller: _desc ,hint: widget.user.description ?? "Aucune description",
                     ),
                     ButtonGradient(callback: validate, text: "Valider les Changements") */
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          });
+    }
   }
 
   Future<void> takePicture(ImageSource source) async {
-    File file = await ImagePicker.pickImage(source: source, maxHeight: 300.0, maxWidth: 300.0);
+    File file = await ImagePicker.pickImage(
+        source: source, maxHeight: 300.0, maxWidth: 300.0);
     FireHelper().modifyPicture(file);
   }
 
