@@ -59,7 +59,7 @@ class PostTile extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                IconButton(icon: (post.likes.contains(user.uid)? likeFull:likeEmpty), onPressed: () => FireHelper().addLike(post)),
+                IconButton(icon: (post.likes.contains(user.uid) ? likeFull : likeEmpty), onPressed: () => FireHelper().addLike(post)),
                 MyText(post.likes.length.toString(), color: baseAccent,),
                 IconButton(icon: msgIcon, onPressed: null),
                 MyText(post.comments.length.toString(), color: baseAccent,)
