@@ -104,8 +104,16 @@ class FireHelper {
     }
   }
 
-
-  
+  addComment(DocumentReference ref, String text) {
+    Map<String, dynamic> map = {
+      keyUid: me.uid,
+      keyText: text,
+      keyDate: DateTime.now().microsecondsSinceEpoch.toInt()
+    };
+    ref.update({
+      keyComments: FieldValue.arrayUnion([map])
+    });
+  }
 
   //Storage
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttersocial/models/posts.dart';
 import 'package:fluttersocial/models/user.dart';
+import 'package:fluttersocial/util/fire_helper.dart';
 import 'package:fluttersocial/view/my_material.dart';
 
 class DetailPost extends StatelessWidget {
@@ -50,7 +51,9 @@ class DetailPost extends StatelessWidget {
                     icon: sendIcon,
                     onPressed: () {
                       FocusScope.of(context).requestFocus(FocusNode());
-                      if (controller.text != null && controller.text != "") {}
+                      if (controller.text != null && controller.text != "") {
+                        FireHelper().addComment(post.ref, controller.text);
+                      }
                     })
               ],
             ),
