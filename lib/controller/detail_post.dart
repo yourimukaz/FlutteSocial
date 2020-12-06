@@ -3,6 +3,7 @@ import 'package:fluttersocial/models/posts.dart';
 import 'package:fluttersocial/models/user.dart';
 import 'package:fluttersocial/util/fire_helper.dart';
 import 'package:fluttersocial/view/my_material.dart';
+import 'package:fluttersocial/view/pages/detail_page.dart';
 
 class DetailPost extends StatelessWidget {
   User user;
@@ -23,9 +24,7 @@ class DetailPost extends StatelessWidget {
             onTap: () {
               FocusScope.of(context).requestFocus(FocusNode());
             },
-            child: Container(
-              color: Colors.pink,
-            ),
+            child: DetailPage(user, post)
           )),
           Container(
             width: MediaQuery.of(context).size.width,

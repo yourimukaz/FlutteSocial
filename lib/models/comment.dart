@@ -5,7 +5,7 @@ class Comment {
   String text;
   String date;
 
-  Comment(Map<String, dynamic> map) {
+  Comment(Map<dynamic, dynamic> map) {
     userId = map[keyUid];
     text = map[keyText];
     date = DateHelper().myDate(map[keyDate]);

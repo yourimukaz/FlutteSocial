@@ -105,7 +105,7 @@ class FireHelper {
   }
 
   addComment(DocumentReference ref, String text) {
-    Map<String, dynamic> map = {
+    Map<dynamic, dynamic> map = {
       keyUid: me.uid,
       keyText: text,
       keyDate: DateTime.now().microsecondsSinceEpoch.toInt()
